@@ -1,0 +1,10 @@
+node_modules
+.idea
+dist
+*.log
+.DS_Store
+.vscode
+version.txt
+
+!package.json
+embedtypes/sdk.d.ts
