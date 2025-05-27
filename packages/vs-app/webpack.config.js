@@ -12,7 +12,6 @@ module.exports = {
   output: {
     filename: "js/[name].bundle.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
   },
   devtool: "source-map",
   resolve: {
@@ -37,7 +36,15 @@ module.exports = {
       title: "Development",
       template: "index.html",
     }),
-    new CopyPlugin({ patterns: [{ from: "assets", to: "assets" }] }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "node_modules/@mp/bundle-sdk",
+          to: "bundle",
+        },
+        { from: "assets", to: "assets" },
+      ],
+    }),
   ],
   devServer: {
     port: 8000,
