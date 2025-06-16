@@ -1,13 +1,20 @@
-import React, { Component } from 'react';
-import { Frame, GetSDK, initComponents, orientedBoxType, slotType, sdkKey } from '@mp/common';
-import { MpSdk } from '@mp/bundle-sdk/sdk';
+import React, { Component } from "react";
+import {
+  Frame,
+  GetSDK,
+  initComponents,
+  orientedBoxType,
+  slotType,
+  sdkKey,
+} from "@mp/common";
+import { MpSdk } from "@mp/bundle-sdk/sdk";
 
-import { AppState } from '../AppState';
-import { SceneLoader } from '../SceneLoader';
-import { ItemList } from './ItemList';
-import { ItemDesc } from 'src/types';
-import { cameraInputType } from '@mp/common/src/sdk-components/Camera';
-import { Vector3, Quaternion, Euler, Matrix4 } from 'three';
+import { AppState } from "../AppState";
+import { SceneLoader } from "../SceneLoader";
+import { ItemList } from "./ItemList";
+import { ItemDesc } from "src/types";
+import { cameraInputType } from "@mp/common/src/sdk-components/Camera";
+import { Vector3, Quaternion, Euler, Matrix4 } from "three";
 
 const SelectedColor = 0xffff00;
 const SelectedOpacity = 0.1;
@@ -55,26 +62,25 @@ export class Main extends Component<Props, State> {
 
     // Forward url params.
     const params = objectFromQuery();
-    params.m = params.m || 'j4RZx7ZGM6T';
-    params.play = params.play || '1';
-    params.qs = params.qs || '1';
-    params.sr = params.sr || '-.15';
-    params.ss = params.ss || '25';
+    params.m = params.m || "5wiUfYzFwBE";
+    params.play = params.play || "1";
+    params.qs = params.qs || "1";
+    params.sr = params.sr || "-.15";
+    params.ss = params.ss || "25";
     // ensure applicationKey is inserted into the bundle query string
     params.applicationKey = params.applicationKey || sdkKey;
     this.applicationKey = params.applicationKey;
 
-    const queryString = Object
-      .keys(params)
-      .map((key) => key + '=' + params[key])
-      .join('&');
+    const queryString = Object.keys(params)
+      .map((key) => key + "=" + params[key])
+      .join("&");
     this.src = `./bundle/showcase.html?${queryString}`;
 
     this.handleListSelection = this.handleListSelection.bind(this);
   }
 
   async componentDidMount() {
-    this.sdk = await GetSDK('sdk-iframe', this.applicationKey);
+    this.sdk = await GetSDK("sdk-iframe", this.applicationKey);
     await initComponents(this.sdk);
     await this.createCameraControl();
     await this.sdk.Scene.configure((renderer: any, three: any) => {
@@ -92,28 +98,39 @@ export class Main extends Component<Props, State> {
       let slot: MpSdk.Scene.IComponent = null;
       let model: MpSdk.Scene.IComponent = null;
       let box: MpSdk.Scene.IComponent = null;
-      const componentIterator: IterableIterator<MpSdk.Scene.IComponent> = node.componentIterator();
+      const componentIterator: IterableIterator<MpSdk.Scene.IComponent> =
+        node.componentIterator();
       for (const component of componentIterator) {
         if (component.componentType === slotType) {
           slot = component;
-        } else if (component.componentType === 'mp.gltfLoader') {
+        } else if (component.componentType === "mp.gltfLoader") {
           model = component;
         } else if (component.componentType == orientedBoxType) {
           box = component as MpSdk.Scene.IComponent;
-          const clickPath = this.scene.sceneObject.addEventPath(box, this.sdk.Scene.InteractionType.CLICK);
+          const clickPath = this.scene.sceneObject.addEventPath(
+            box,
+            this.sdk.Scene.InteractionType.CLICK
+          );
           const clickSpy = {
-            id: 'clickSpy-' + count,
+            id: "clickSpy-" + count,
             path: clickPath,
             onEvent: (payload: { input: { button: number } }) => {
               if (payload.input.button !== undefined) {
-                this.handleOrientedBoxInteraction(node, component, this.sdk.Scene.InteractionType.CLICK);
+                this.handleOrientedBoxInteraction(
+                  node,
+                  component,
+                  this.sdk.Scene.InteractionType.CLICK
+                );
               }
             },
           };
           this.scene.sceneObject.spyOnEvent(clickSpy);
-          const hoverPath = this.scene.sceneObject.addEventPath(box, this.sdk.Scene.InteractionType.HOVER);
+          const hoverPath = this.scene.sceneObject.addEventPath(
+            box,
+            this.sdk.Scene.InteractionType.HOVER
+          );
           const hoverSpy = {
-            id: 'hoverSpy-' + count,
+            id: "hoverSpy-" + count,
             path: hoverPath,
             onEvent: (payload: { hover: boolean }) => {
               this.cameraInput.inputs.suppressClick = !payload.hover;
@@ -137,7 +154,7 @@ export class Main extends Component<Props, State> {
     };
 
     this.slots = slots;
-    await this.scene.load('AAWs9eZ9ip6', findSlots);
+    await this.scene.load("AAWs9eZ9ip6", findSlots);
   }
 
   private handleListSelection(item: ItemDesc) {
@@ -177,7 +194,8 @@ export class Main extends Component<Props, State> {
           if (lastSlotNode) {
             lastSlotNode.boxComponent.inputs.color = UnselectedColor;
             lastSlotNode.boxComponent.inputs.opacity = UnselectedOpacity;
-            lastSlotNode.boxComponent.inputs.lineOpacity = UnselectedLineOpacity;
+            lastSlotNode.boxComponent.inputs.lineOpacity =
+              UnselectedLineOpacity;
           }
           if (lastSlotNode === slot) {
             this.cameraInput.inputs.focus = null;
@@ -212,7 +230,7 @@ export class Main extends Component<Props, State> {
     }
 
     return (
-      <div className='main'>
+      <div className="main">
         <ItemList
           items={filteredItems}
           onSelected={this.handleListSelection}
@@ -225,7 +243,7 @@ export class Main extends Component<Props, State> {
   async createCameraControl() {
     [this.sceneObject] = await this.sdk.Scene.createObjects(1);
     const cameraNode = this.sceneObject.addNode();
-    const cameraPose = await this.sdk.Camera.pose.waitUntil(pose => !!pose);
+    const cameraPose = await this.sdk.Camera.pose.waitUntil((pose) => !!pose);
     this.cameraInput = cameraNode.addComponent(cameraInputType);
     // convert sdk pose to THREE.js objects
     this.cameraInput.inputs.startPose = {
@@ -239,15 +257,18 @@ export class Main extends Component<Props, State> {
           cameraPose.rotation.x * (Math.PI / 180),
           cameraPose.rotation.y * (Math.PI / 180),
           0, // No Z value on cameraPose
-          'YXZ'
+          "YXZ"
         )
       ),
       projection: new Matrix4().fromArray(cameraPose.projection).transpose(),
     };
-    const cameraControl = cameraNode.addComponent('mp.camera');
+    const cameraControl = cameraNode.addComponent("mp.camera");
 
-    const inputPath = this.sceneObject.addInputPath(cameraControl, 'camera');
-    const outputPath = this.sceneObject.addOutputPath(this.cameraInput, 'camera');
+    const inputPath = this.sceneObject.addInputPath(cameraControl, "camera");
+    const outputPath = this.sceneObject.addOutputPath(
+      this.cameraInput,
+      "camera"
+    );
     inputPath.bind(outputPath);
 
     cameraNode.start();

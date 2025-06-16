@@ -83097,24 +83097,23 @@ class Main extends react.Component {
         };
         // Forward url params.
         const params = objectFromQuery();
-        params.m = params.m || 'j4RZx7ZGM6T';
-        params.play = params.play || '1';
-        params.qs = params.qs || '1';
-        params.sr = params.sr || '-.15';
-        params.ss = params.ss || '25';
+        params.m = params.m || "5wiUfYzFwBE";
+        params.play = params.play || "1";
+        params.qs = params.qs || "1";
+        params.sr = params.sr || "-.15";
+        params.ss = params.ss || "25";
         // ensure applicationKey is inserted into the bundle query string
         params.applicationKey = params.applicationKey || sdkKey;
         this.applicationKey = params.applicationKey;
-        const queryString = Object
-            .keys(params)
-            .map((key) => key + '=' + params[key])
-            .join('&');
+        const queryString = Object.keys(params)
+            .map((key) => key + "=" + params[key])
+            .join("&");
         this.src = `./bundle/showcase.html?${queryString}`;
         this.handleListSelection = this.handleListSelection.bind(this);
     }
     componentDidMount() {
         return Main_awaiter(this, void 0, void 0, function* () {
-            this.sdk = yield GetSDK('sdk-iframe', this.applicationKey);
+            this.sdk = yield GetSDK("sdk-iframe", this.applicationKey);
             yield initComponents(this.sdk);
             yield this.createCameraControl();
             yield this.sdk.Scene.configure((renderer, three) => {
@@ -83136,14 +83135,14 @@ class Main extends react.Component {
                     if (component.componentType === slotType) {
                         slot = component;
                     }
-                    else if (component.componentType === 'mp.gltfLoader') {
+                    else if (component.componentType === "mp.gltfLoader") {
                         model = component;
                     }
                     else if (component.componentType == orientedBoxType) {
                         box = component;
                         const clickPath = this.scene.sceneObject.addEventPath(box, this.sdk.Scene.InteractionType.CLICK);
                         const clickSpy = {
-                            id: 'clickSpy-' + count,
+                            id: "clickSpy-" + count,
                             path: clickPath,
                             onEvent: (payload) => {
                                 if (payload.input.button !== undefined) {
@@ -83154,7 +83153,7 @@ class Main extends react.Component {
                         this.scene.sceneObject.spyOnEvent(clickSpy);
                         const hoverPath = this.scene.sceneObject.addEventPath(box, this.sdk.Scene.InteractionType.HOVER);
                         const hoverSpy = {
-                            id: 'hoverSpy-' + count,
+                            id: "hoverSpy-" + count,
                             path: hoverPath,
                             onEvent: (payload) => {
                                 this.cameraInput.inputs.suppressClick = !payload.hover;
@@ -83177,7 +83176,7 @@ class Main extends react.Component {
                 }
             };
             this.slots = slots;
-            yield this.scene.load('AAWs9eZ9ip6', findSlots);
+            yield this.scene.load("AAWs9eZ9ip6", findSlots);
         });
     }
     handleListSelection(item) {
@@ -83212,7 +83211,8 @@ class Main extends react.Component {
                     if (lastSlotNode) {
                         lastSlotNode.boxComponent.inputs.color = UnselectedColor;
                         lastSlotNode.boxComponent.inputs.opacity = UnselectedOpacity;
-                        lastSlotNode.boxComponent.inputs.lineOpacity = UnselectedLineOpacity;
+                        lastSlotNode.boxComponent.inputs.lineOpacity =
+                            UnselectedLineOpacity;
                     }
                     if (lastSlotNode === slot) {
                         this.cameraInput.inputs.focus = null;
@@ -83243,7 +83243,7 @@ class Main extends react.Component {
                 filteredItems = items.get(category);
             }
         }
-        return (react.createElement("div", { className: 'main' },
+        return (react.createElement("div", { className: "main" },
             react.createElement(ItemList, { items: filteredItems, onSelected: this.handleListSelection }),
             react.createElement(Frame, { src: this.src })));
     }
@@ -83251,18 +83251,18 @@ class Main extends react.Component {
         return Main_awaiter(this, void 0, void 0, function* () {
             [this.sceneObject] = yield this.sdk.Scene.createObjects(1);
             const cameraNode = this.sceneObject.addNode();
-            const cameraPose = yield this.sdk.Camera.pose.waitUntil(pose => !!pose);
+            const cameraPose = yield this.sdk.Camera.pose.waitUntil((pose) => !!pose);
             this.cameraInput = cameraNode.addComponent(cameraInputType);
             // convert sdk pose to THREE.js objects
             this.cameraInput.inputs.startPose = {
                 position: new Vector3(cameraPose.position.x, cameraPose.position.y, cameraPose.position.z),
                 quaternion: new Quaternion().setFromEuler(new Euler(cameraPose.rotation.x * (Math.PI / 180), cameraPose.rotation.y * (Math.PI / 180), 0, // No Z value on cameraPose
-                'YXZ')),
+                "YXZ")),
                 projection: new Matrix4().fromArray(cameraPose.projection).transpose(),
             };
-            const cameraControl = cameraNode.addComponent('mp.camera');
-            const inputPath = this.sceneObject.addInputPath(cameraControl, 'camera');
-            const outputPath = this.sceneObject.addOutputPath(this.cameraInput, 'camera');
+            const cameraControl = cameraNode.addComponent("mp.camera");
+            const inputPath = this.sceneObject.addInputPath(cameraControl, "camera");
+            const outputPath = this.sceneObject.addOutputPath(this.cameraInput, "camera");
             inputPath.bind(outputPath);
             cameraNode.start();
         });

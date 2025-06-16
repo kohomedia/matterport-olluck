@@ -27,7 +27,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap && lerna link",
     "clean": "lerna clean --yes",
-    "clean-lerna": "yarn install && yarn bootstrap",
+    "clean-lerna": "yarn install --legacy-peer-deps && yarn bootstrap",
     "build-all-dev": "lerna run build-dev",
     "build-all-prod": "lerna run build-prod",
     "inspector": "lerna run develop --scope=inspector --stream",
