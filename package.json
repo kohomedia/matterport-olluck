@@ -31,7 +31,7 @@
     "build-all-dev": "lerna run build-dev",
     "build-all-prod": "lerna run build-prod",
     "inspector": "lerna run develop --scope=inspector --stream",
-    "vs-app": "lerna run develop --scope=vs-app --stream",
+    "vs-app": "lerna run build --scope=vs-app --stream",
     "test": "lerna run test --stream"
   },
   "workspaces": [
