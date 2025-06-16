@@ -1,50 +1,89 @@
-export const test: string = 'test';
+export const test: string = "test";
 
-export { GetSDK } from './Sdk';
-export { Frame } from './components/Frame';
-export * from './SceneComponent';
-
-// vs-app only
-export * from './sdk-components/CanvasRenderer';
-export * from './sdk-components/OrientedBox';
-export * from './sdk-components/SecurityCamera';
-export * from './sdk-components/SceneRenderer';
-export * from './sdk-components/Slot';
-export * from './sdk-components/PlaneRenderer';
-export * from './sdk-components/VideoRenderer';
-export * from './sdk-components/VideoStreamCapture';
-export * from './sdk-components/NestThermostat';
-export * from './sdk-components/RoomShadow';
-export * from './sdk-components/ClockPainter';
-export * from './sdk-components/SphereSource';
+export { GetSDK } from "./Sdk";
+export { Frame } from "./components/Frame";
+export * from "./SceneComponent";
 
 // vs-app only
-import { orientedBoxType, makeOrientedBox } from './sdk-components/OrientedBox';
-import { slotType, makeSlot } from './sdk-components/Slot';
-import { securityCameraType, makeSecurityCamera } from './sdk-components/SecurityCamera';
-import { loadingIndicatorType, makeLoadingIndicator } from './sdk-components/LoadingIndicator';
-import { planeRendererType, makePlaneRenderer } from './sdk-components/PlaneRenderer';
-import { canvasRendererType, makeCanvasRenderer } from './sdk-components/CanvasRenderer';
-import { sceneRendererType, makeSceneRenderer } from './sdk-components/SceneRenderer';
-import { videoRendererType, makeVideoRenderer } from './sdk-components/VideoRenderer';
-import { videoStreamCaptureType, makeVideoStreamCapture } from './sdk-components/VideoStreamCapture';
-import { nestThermostatType, makeNestThermostat } from './sdk-components/NestThermostat';
-import { roomShadowType, makeRoomShadow } from './sdk-components/RoomShadow';
-import { clockPainterType, makeClockPainter } from './sdk-components/ClockPainter';
-import { scenePainterType, makeScenePainter } from './sdk-components/ScenePainter';
-import { tunerType, makeTuner } from './sdk-components/Tuner';
-import { hlsLoaderType, makeHlsLoader } from './sdk-components/HlsLoader';
-import { mjpegPlayerType, makeMjpegPlayer } from './sdk-components/MjpegPlayer';
-import { toggleStateType, makeToggleState } from './sdk-components/ToggleState';
-import { canvasBorderType, makeCanvasBorder } from './sdk-components/CanvasBorder';
-import { canvasTextType, makeCanvasText } from './sdk-components/CanvasText';
-import { canvasImageType, makeCanvasImage } from './sdk-components/CanvasImage';
-import { cameraInputType, makeCameraInput } from './sdk-components/Camera';
+export * from "./sdk-components/CanvasRenderer";
+export * from "./sdk-components/OrientedBox";
+export * from "./sdk-components/SecurityCamera";
+export * from "./sdk-components/SceneRenderer";
+export * from "./sdk-components/Slot";
+export * from "./sdk-components/PlaneRenderer";
+export * from "./sdk-components/VideoRenderer";
+export * from "./sdk-components/VideoStreamCapture";
+export * from "./sdk-components/NestThermostat";
+export * from "./sdk-components/RoomShadow";
+export * from "./sdk-components/ClockPainter";
+export * from "./sdk-components/SphereSource";
+
+// vs-app only
+import { orientedBoxType, makeOrientedBox } from "./sdk-components/OrientedBox";
+import { slotType, makeSlot } from "./sdk-components/Slot";
+import {
+  securityCameraType,
+  makeSecurityCamera,
+} from "./sdk-components/SecurityCamera";
+import {
+  loadingIndicatorType,
+  makeLoadingIndicator,
+} from "./sdk-components/LoadingIndicator";
+import {
+  planeRendererType,
+  makePlaneRenderer,
+} from "./sdk-components/PlaneRenderer";
+import {
+  canvasRendererType,
+  makeCanvasRenderer,
+} from "./sdk-components/CanvasRenderer";
+import {
+  sceneRendererType,
+  makeSceneRenderer,
+} from "./sdk-components/SceneRenderer";
+import {
+  videoRendererType,
+  makeVideoRenderer,
+} from "./sdk-components/VideoRenderer";
+import {
+  videoStreamCaptureType,
+  makeVideoStreamCapture,
+} from "./sdk-components/VideoStreamCapture";
+import {
+  nestThermostatType,
+  makeNestThermostat,
+} from "./sdk-components/NestThermostat";
+import { roomShadowType, makeRoomShadow } from "./sdk-components/RoomShadow";
+import {
+  clockPainterType,
+  makeClockPainter,
+} from "./sdk-components/ClockPainter";
+import {
+  scenePainterType,
+  makeScenePainter,
+} from "./sdk-components/ScenePainter";
+import { tunerType, makeTuner } from "./sdk-components/Tuner";
+import { hlsLoaderType, makeHlsLoader } from "./sdk-components/HlsLoader";
+import { mjpegPlayerType, makeMjpegPlayer } from "./sdk-components/MjpegPlayer";
+import { toggleStateType, makeToggleState } from "./sdk-components/ToggleState";
+import {
+  canvasBorderType,
+  makeCanvasBorder,
+} from "./sdk-components/CanvasBorder";
+import { canvasTextType, makeCanvasText } from "./sdk-components/CanvasText";
+import { canvasImageType, makeCanvasImage } from "./sdk-components/CanvasImage";
+import { cameraInputType, makeCameraInput } from "./sdk-components/Camera";
 
 // vs-app + inspector
-import { makeSphereSource, sphereSourceType } from './sdk-components/SphereSource';
-import { boxSourceType, makeBoxSource } from './sdk-components/BoxSource';
-import { cylinderSourceType, makeCylinderSource } from './sdk-components/CylinderSource';
+import {
+  makeSphereSource,
+  sphereSourceType,
+} from "./sdk-components/SphereSource";
+import { boxSourceType, makeBoxSource } from "./sdk-components/BoxSource";
+import {
+  cylinderSourceType,
+  makeCylinderSource,
+} from "./sdk-components/CylinderSource";
 
 // TO-DO - Used in vs-app and inspector - might de-globalize
 export const initComponents = async (sdk: any) => {
@@ -76,7 +115,7 @@ export const initComponents = async (sdk: any) => {
   ]);
 };
 
-export const assetVersion = '1.0-2-g6b74572';
+export const assetVersion = "1.0-2-g6b74572";
 export const cdnUrl = `https://static.matterport.com/showcase-sdk/examples/assets-${assetVersion}/assets`;
-export const sdkKey = '2d4dfb9fd6414902b663c25a6c767cfa';
-export const interfaceVersion = '3.10';
+export const sdkKey = "y74mda35naw289ard6f4ggk0b";
+export const interfaceVersion = "3.10";
