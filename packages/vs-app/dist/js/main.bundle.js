@@ -75669,7 +75669,7 @@ const initComponents = (sdk) => src_awaiter(void 0, void 0, void 0, function* ()
 });
 const assetVersion = "1.0-2-g6b74572";
 const cdnUrl = `https://static.matterport.com/showcase-sdk/examples/assets-${assetVersion}/assets`;
-const sdkKey = "y74mda35naw289ard6f4ggk0b";
+const sdkKey = "2d4dfb9fd6414902b663c25a6c767cfa";
 const interfaceVersion = "3.10";
 
 ;// CONCATENATED MODULE: ./assets/vs-app.json
@@ -83097,7 +83097,7 @@ class Main extends react.Component {
         };
         // Forward url params.
         const params = objectFromQuery();
-        params.m = params.m || "5wiUfYzFwBE";
+        params.m = params.m || "j4RZx7ZGM6T";
         params.play = params.play || "1";
         params.qs = params.qs || "1";
         params.sr = params.sr || "-.15";
